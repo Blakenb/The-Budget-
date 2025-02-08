@@ -1,0 +1,84 @@
+:root {
+    --background-color: #ffffff; /* Light mode background color */
+    --container-background-color: #f0f0f0; /* Light mode container background color */
+    --text-color: #000000; /* Light mode text color */
+    --input-border-color: #7f8c8d;
+    --button-background-color: #e74c3c;
+    --button-hover-background-color: #c0392b;
+    --table-border-color: #7f8c8d;
+    --table-header-background-color: #7f8c8d;
+    --table-text-color: #000000; /* Light mode table text color */
+}
+
+body {
+    font-family: 'Arial Black', Gadget, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: var(--container-background-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+h1, h2 {
+    text-align: center;
+    color: var(--text-color);
+}
+
+form {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+form input {
+    flex: 1;
+    margin-right: 10px;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid var(--input-border-color);
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+form button {
+    padding: 12px 24px;
+    font-size: 16px;
+    background-color: var(--button-background-color);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+form button:hover {
+    background-color: var(--button-hover-background-color);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table, th, td {
+    border: 1px solid var(--table-border-color);
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    color: var(--table-text-color);
+}
+
+th {
+    background-color: var(--table-header-background-color);
+}

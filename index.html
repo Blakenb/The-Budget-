@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>The Budget Tracker</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome</h1>
+        <h2>The Budget Tracker</h2>
+        <form id="budget-form">
+            <input type="text" id="expense-name" placeholder="Expense Name" required>
+            <input type="number" id="expense-amount" placeholder="Amount" step="0.01" required>
+            <button type="submit">Add Expense</button>
+        </form>
+        <button id="clear-all">Clear All</button>
+        <table id="expense-table">
+            <thead>
+                <tr>
+                    <th>Expense</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Expenses will be added here -->
+            </tbody>
+        </table>
+        <h2>Total: $<span id="total-amount">0</span></h2>
+        <h3>Expense List:</h3>
+        <ul id="expense-list">
+            <!-- Expense items will be added here -->
+        </ul>
+    </div>
+    <script src="spript.js"></script>
+</body>
+</html>
