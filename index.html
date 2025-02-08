@@ -10,12 +10,20 @@
     <div class="container">
         <h1>Welcome</h1>
         <h2>The Budget Tracker</h2>
-        <form id="budget-form">
+        
+        <form id="income-form">
+            <input type="number" id="income-amount" placeholder="Income Amount" step="0.01" required>
+            <button type="submit">Add Income</button>
+        </form>
+        
+        <form id="expense-form">
             <input type="text" id="expense-name" placeholder="Expense Name" required>
-            <input type="number" id="expense-amount" placeholder="Amount" step="0.01" required>
+            <input type="number" id="expense-amount" placeholder="Expense Amount" step="0.01" required>
             <button type="submit">Add Expense</button>
         </form>
+        
         <button id="clear-all">Clear All</button>
+        
         <table id="expense-table">
             <thead>
                 <tr>
@@ -27,9 +35,14 @@
                 <!-- Expenses will be added here -->
             </tbody>
         </table>
-        <h2>Total: $<span id="total-amount">0</span></h2>
+        
+        <h2>Total Income: $<span id="total-income">0</span></h2>
+        <h2>Total Expenses: $<span id="total-amount">0</span></h2>
+        <h2>Remaining Balance: $<span id="remaining-balance">0</span></h2>
+        
+        <button id="toggle-expense-list">Hide Expense List</button>
         <h3>Expense List:</h3>
-        <ul id="expense-list">
+        <ul id="expense-list" class="expense-list">
             <!-- Expense items will be added here -->
         </ul>
     </div>

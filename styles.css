@@ -82,3 +82,31 @@ th, td {
 th {
     background-color: var(--table-header-background-color);
 }
+
+.expense-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns of equal width */
+    gap: 20px; /* Adjust the gap between items as needed */
+    list-style-type: none; /* Remove default list styling */
+    padding: 0; /* Remove default padding */
+}
+
+.expense-item {
+    background-color: var(--container-background-color);
+    padding: 10px;
+    border: 1px solid var(--input-border-color);
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.expense-list li {
+    background-color: var(--container-background-color);
+    padding: 10px;
+    border: 1px solid var(--input-border-color);
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.hidden {
+    display: none;
+}

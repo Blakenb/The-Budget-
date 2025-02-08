@@ -1,30 +1,75 @@
-document.getElementById("budget-form").addEventListener("submit", function (e) {
+document.getElementById("income-form").addEventListener("submit", function (e) {
   e.preventDefault();
 
-  const expenseName = document.getElementById("expense-name").value;
-  const expenseAmount = parseFloat(
-    document.getElementById("expense-amount").value
+  const incomeAmount = parseFloat(
+    document.getElementById("income-amount").value
   );
 
-  console.log("Expense Name:", expenseName);
-  console.log("Expense Amount:", expenseAmount);
+  console.log("Income Amount:", incomeAmount);
 
-  if (expenseName && !isNaN(expenseAmount)) {
-    console.log("Adding expense...");
-    addExpense(expenseName, expenseAmount.toFixed(2));
-    updateTotal(expenseAmount);
-    addExpenseToList(expenseName, expenseAmount.toFixed(2));
-    saveExpense(expenseName, expenseAmount.toFixed(2));
-    clearForm();
+  if (!isNaN(incomeAmount)) {
+    addIncome(incomeAmount);
+    updateRemainingBalance();
+    clearIncomeForm();
   } else {
     console.log("Invalid input");
   }
 });
 
+document
+  .getElementById("expense-form")
+  .addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const expenseName = document.getElementById("expense-name").value;
+    const expenseAmount = parseFloat(
+      document.getElementById("expense-amount").value
+    );
+
+    console.log("Expense Name:", expenseName);
+    console.log("Expense Amount:", expenseAmount);
+
+    if (expenseName && !isNaN(expenseAmount)) {
+      console.log("Adding expense...");
+      addExpense(expenseName, expenseAmount.toFixed(2));
+      updateTotal(expenseAmount);
+      addExpenseToList(expenseName, expenseAmount.toFixed(2));
+      saveExpense(expenseName, expenseAmount.toFixed(2));
+      clearExpenseForm();
+    } else {
+      console.log("Invalid input");
+    }
+  });
+
 document.getElementById("clear-all").addEventListener("click", function () {
   console.log("Clearing all expenses...");
   clearAllExpenses();
 });
+
+document
+  .getElementById("toggle-expense-list")
+  .addEventListener("click", function () {
+    const expenseList = document.getElementById("expense-list");
+    const toggleButton = document.getElementById("toggle-expense-list");
+
+    if (expenseList.classList.contains("hidden")) {
+      expenseList.classList.remove("hidden");
+      toggleButton.textContent = "Hide Expense List";
+    } else {
+      expenseList.classList.add("hidden");
+      toggleButton.textContent = "Show Expense List";
+    }
+  });
+
+function addIncome(amount) {
+  console.log("Adding income...");
+  const totalIncomeElement = document.getElementById("total-income");
+  const currentIncome = parseFloat(totalIncomeElement.textContent);
+  const newIncome = currentIncome + amount;
+  totalIncomeElement.textContent = newIncome.toFixed(2);
+  localStorage.setItem("totalIncome", newIncome.toFixed(2));
+  console.log("Income added:", newIncome.toFixed(2));
+}
 
 function addExpense(name, amount) {
   console.log("Adding expense to table...");
@@ -45,14 +90,20 @@ function updateTotal(amount) {
   console.log("Updating total...");
   const totalElement = document.getElementById("total-amount");
   const currentTotal = parseFloat(totalElement.textContent);
-  console.log("Current Total:", currentTotal);
-  console.log("Amount to Add:", amount);
   const newTotal = currentTotal + parseFloat(amount);
-  console.log("New Total:", newTotal);
-
   totalElement.textContent = newTotal.toFixed(2);
   localStorage.setItem("totalAmount", newTotal.toFixed(2));
   console.log("Total updated:", newTotal.toFixed(2));
+  updateRemainingBalance();
+}
+
+function updateRemainingBalance() {
+  const totalIncome = parseFloat(localStorage.getItem("totalIncome")) || 0;
+  const totalExpenses = parseFloat(localStorage.getItem("totalAmount")) || 0;
+  const remainingBalance = totalIncome - totalExpenses;
+  document.getElementById("remaining-balance").textContent =
+    remainingBalance.toFixed(2);
+  console.log("Remaining Balance updated:", remainingBalance.toFixed(2));
 }
 
 function addExpenseToList(name, amount) {
@@ -83,13 +134,23 @@ function loadExpenses() {
   const totalAmount = localStorage.getItem("totalAmount") || "0";
   document.getElementById("total-amount").textContent = totalAmount;
   console.log("Expenses loaded. Total amount:", totalAmount);
+
+  const totalIncome = localStorage.getItem("totalIncome") || "0";
+  document.getElementById("total-income").textContent = totalIncome;
+  updateRemainingBalance();
 }
 
-function clearForm() {
-  console.log("Clearing form...");
+function clearIncomeForm() {
+  console.log("Clearing income form...");
+  document.getElementById("income-amount").value = "";
+  console.log("Income form cleared");
+}
+
+function clearExpenseForm() {
+  console.log("Clearing expense form...");
   document.getElementById("expense-name").value = "";
   document.getElementById("expense-amount").value = "";
-  console.log("Form cleared");
+  console.log("Expense form cleared");
 }
 
 function clearAllExpenses() {
@@ -102,6 +163,7 @@ function clearAllExpenses() {
     .getElementsByTagName("tbody")[0].innerHTML = "";
   document.getElementById("expense-list").innerHTML = "";
   document.getElementById("total-amount").textContent = "0";
+  updateRemainingBalance();
   console.log("All expenses cleared");
 }
 
