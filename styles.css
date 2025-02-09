@@ -1,5 +1,5 @@
 :root {
-    --background-color: #ffffff; /* Light mode background color */
+    --background-color: #333333; /* Dark gray background color */
     --container-background-color: #f0f0f0; /* Light mode container background color */
     --text-color: #000000; /* Light mode text color */
     --input-border-color: #7f8c8d;
@@ -19,9 +19,9 @@ body {
 }
 
 .container {
-    max-width: 600px;
+    max-width: 800px; /* Increase the max-width */
     margin: 50px auto;
-    padding: 30px;
+    padding: 40px; /* Increase the padding */
     background-color: var(--container-background-color);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
@@ -109,4 +109,76 @@ th {
 
 .hidden {
     display: none;
+}
+
+.summary-boxes {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.summary-box {
+    flex: 1;
+    margin: 0 10px;
+    padding: 20px;
+    background-color: var(--container-background-color);
+    border: 1px solid var(--input-border-color);
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.summary-box h2 {
+    margin: 0 0 10px;
+    color: var(--text-color);
+}
+
+.summary-box p {
+    font-size: 24px;
+    color: var(--text-color);
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        margin: 20px;
+        padding: 20px;
+    }
+
+    form {
+        flex-direction: column;
+    }
+
+    form input {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    form button {
+        width: 100%;
+    }
+
+    .expense-list {
+        grid-template-columns: 1fr; /* Single column */
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        margin: 10px;
+        padding: 10px;
+    }
+
+    h1, h2 {
+        font-size: 1.5em;
+    }
+
+    form input, form button {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .expense-list {
+        gap: 10px; /* Smaller gap between items */
+    }
 }

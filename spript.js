@@ -31,7 +31,6 @@ document
 
     if (expenseName && !isNaN(expenseAmount)) {
       console.log("Adding expense...");
-      addExpense(expenseName, expenseAmount.toFixed(2));
       updateTotal(expenseAmount);
       addExpenseToList(expenseName, expenseAmount.toFixed(2));
       saveExpense(expenseName, expenseAmount.toFixed(2));
@@ -69,21 +68,6 @@ function addIncome(amount) {
   totalIncomeElement.textContent = newIncome.toFixed(2);
   localStorage.setItem("totalIncome", newIncome.toFixed(2));
   console.log("Income added:", newIncome.toFixed(2));
-}
-
-function addExpense(name, amount) {
-  console.log("Adding expense to table...");
-  const table = document
-    .getElementById("expense-table")
-    .getElementsByTagName("tbody")[0];
-  const newRow = table.insertRow();
-
-  const nameCell = newRow.insertCell(0);
-  const amountCell = newRow.insertCell(1);
-
-  nameCell.textContent = name;
-  amountCell.textContent = `$${amount}`;
-  console.log("Expense added to table:", name, amount);
 }
 
 function updateTotal(amount) {
@@ -127,7 +111,6 @@ function loadExpenses() {
   console.log("Loading expenses...");
   const expenses = JSON.parse(localStorage.getItem("expenses")) || [];
   expenses.forEach((expense) => {
-    addExpense(expense.name, expense.amount);
     addExpenseToList(expense.name, expense.amount);
   });
 
@@ -158,9 +141,6 @@ function clearAllExpenses() {
   localStorage.removeItem("expenses");
   localStorage.setItem("totalAmount", "0");
 
-  document
-    .getElementById("expense-table")
-    .getElementsByTagName("tbody")[0].innerHTML = "";
   document.getElementById("expense-list").innerHTML = "";
   document.getElementById("total-amount").textContent = "0";
   updateRemainingBalance();
